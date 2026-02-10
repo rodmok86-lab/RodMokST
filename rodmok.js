@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 3. Configurar formulário
     configurarFormulario();
     
-    // 4. Inicializar carrinho
+    // 4. Inicializar carrinho (agora com modal)
     inicializarCarrinho();
     
     // 5. Animações de entrada
@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 6. Testar funcionalidades
     testarFuncionalidades();
+    
+    // 7. Configurar newsletter
+    configurarNewsletter();
 });
 
 // ========== FUNÇÕES PRINCIPAIS ==========
@@ -38,289 +41,293 @@ function atualizarAno() {
         
         if (elementoAno) {
             elementoAno.textContent = anoAtual;
-            console.log(`📅 Ano atualizado para: ${anoAtual}`);
         } else {
-            console.log('⚠️ Elemento do ano não encontrado');
-            // Tenta alternativa
+            // fallback
             const footers = document.getElementsByTagName('footer');
             if (footers.length > 0) {
-                const paragrafos = footers[0].getElementsByTagName('p');
-                for (let p of paragrafos) {
-                    if (p.textContent.includes('2024')) {
-                        p.textContent = p.textContent.replace('2024', anoAtual);
-                        console.log('✅ Ano corrigido via texto');
+                const ps = footers[0].getElementsByTagName('p');
+                for (let p of ps) {
+                    if (p.textContent.includes('2024') || p.textContent.includes('2025')) {
+                        p.textContent = p.textContent.replace(/\d{4}/, anoAtual);
                         break;
                     }
                 }
             }
         }
-    } catch (erro) {
-        console.log('❌ Erro ao atualizar ano:', erro.message);
+    } catch (e) {
+        console.warn('Ano não atualizado:', e);
     }
 }
 
-// 2. CONFIGURAR MENU ATIVO
+// 2. CONFIGURAR MENU ATIVO + rolagem suave
 function configurarMenu() {
-    try {
-        const links = document.querySelectorAll('.menu a');
-        const urlAtual = window.location.hash || '#inicio';
-        
-        links.forEach(link => {
-            link.classList.remove('ativo');
-            if (link.getAttribute('href') === urlAtual) {
-                link.classList.add('ativo');
+    const links = document.querySelectorAll('.menu a');
+    const urlAtual = window.location.hash || '#inicio';
+
+    links.forEach(link => {
+        link.classList.remove('ativo');
+        if (link.getAttribute('href') === urlAtual) {
+            link.classList.add('ativo');
+        }
+
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const destino = this.getAttribute('href');
+
+            // Atualiza ativo
+            links.forEach(l => l.classList.remove('ativo'));
+            this.classList.add('ativo');
+
+            // Rolagem suave
+            if (destino.startsWith('#')) {
+                const el = document.querySelector(destino);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
-            
-            // Adicionar evento de clique
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const destino = this.getAttribute('href');
-                
-                // Atualizar classe ativa
-                links.forEach(l => l.classList.remove('ativo'));
-                this.classList.add('ativo');
-                
-                // Rolagem suave
-                if (destono.startsWith('#')) {
-                    const elemento = document.querySelector(destino);
-                    if (elemento) {
-                        elemento.scrollIntoView({ behavior: 'smooth' });
-                        console.log(`📍 Navegando para: ${destono}`);
-                    }
-                }
-            });
         });
-        
-        console.log('✅ Menu configurado');
-    } catch (erro) {
-        console.log('⚠️ Menu não configurado:', erro.message);
-    }
+    });
 }
 
-// 3. CONFIGURAR FORMULÁRIO
+// 3. CONFIGURAR FORMULÁRIO DE CONTATO
 function configurarFormulario() {
-    try {
-        const formulario = document.querySelector('.form-contato');
-        
-        if (formulario) {
-            formulario.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Pegar valores
-                const nome = this.querySelector('input[type="text"]').value;
-                const email = this.querySelector('input[type="email"]').value;
-                const mensagem = this.querySelector('textarea').value;
-                
-                // Validação simples
-                if (!nome || !email || !mensagem) {
-                    alert('❌ Por favor, preencha todos os campos!');
-                    return;
-                }
-                
-                // Simular envio
-                console.log('📧 Enviando mensagem:', { nome, email, mensagem });
-                
-                // Feedback visual
-                const botao = this.querySelector('.btn-grande');
-                const textoOriginal = botao.innerHTML;
-                botao.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
-                botao.disabled = true;
-                
-                setTimeout(() => {
-                    alert(`✅ Obrigado, ${nome}! Sua mensagem foi enviada com sucesso!\n\nResponderemos em até 48 horas.`);
-                    formulario.reset();
-                    botao.innerHTML = textoOriginal;
-                    botao.disabled = false;
-                    console.log('✅ Mensagem simulada enviada');
-                }, 1500);
-            });
-            
-            console.log('✅ Formulário configurado');
-        }
-    } catch (erro) {
-        console.log('⚠️ Formulário não configurado:', erro.message);
-    }
-}
+    const form = document.querySelector('.form-contato');
+    if (!form) return;
 
-// 4. CARRINHO DE COMPRAS
-function inicializarCarrinho() {
-    try {
-        // Recuperar carrinho do localStorage
-        const carrinhoSalvo = localStorage.getItem('rodmokCarrinho');
-        if (carrinhoSalvo) {
-            carrinho = JSON.parse(carrinhoSalvo);
-            atualizarContadorCarrinho();
-            console.log('🛒 Carrinho recuperado:', carrinho);
-        }
-        
-        // Configurar botão do carrinho
-        const botaoCarrinho = document.querySelector('.carrinho');
-        if (botaoCarrinho) {
-            botaoCarrinho.addEventListener('click', function() {
-                alert(`🛍️ Você tem ${carrinho.length} item(s) no carrinho!\n\nTotal: R$ ${totalCarrinho.toFixed(2)}`);
-            });
-        }
-        
-        console.log('✅ Carrinho inicializado');
-    } catch (erro) {
-        console.log('⚠️ Carrinho não inicializado:', erro.message);
-    }
-}
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-function adicionarCarrinho(idProduto) {
-    try {
-        // Produtos simulados
-        const produtos = {
-            1: { nome: 'Camiseta "Urban Legends"', preco: 89.90 },
-            2: { nome: 'Jaqueta "Night Rider"', preco: 159.90 },
-            3: { nome: 'Calça "Street Comfort"', preco: 129.90 }
-        };
-        
-        const produto = produtos[idProduto];
-        if (!produto) return;
-        
-        // Adicionar ao carrinho
-        carrinho.push(produto);
-        totalCarrinho += produto.preco;
-        
-        // Salvar no localStorage
-        localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
-        
-        // Atualizar contador
-        atualizarContadorCarrinho();
-        
-        // Feedback visual
-        const botao = event.target;
+        const nome = form.querySelector('input[type="text"]')?.value.trim();
+        const email = form.querySelector('input[type="email"]')?.value.trim();
+        const msg = form.querySelector('textarea')?.value.trim();
+
+        if (!nome || !email || !msg) {
+            mostrarMensagemTemporaria('❌ Preencha todos os campos!', 'erro');
+            return;
+        }
+
+        const botao = form.querySelector('button[type="submit"]');
         const textoOriginal = botao.innerHTML;
-        botao.innerHTML = '<i class="fas fa-check"></i> ADICIONADO!';
-        botao.style.background = '#1dd1a1';
-        botao.style.borderColor = '#1dd1a1';
-        botao.style.color = '#000';
-        
-        console.log(`✅ Produto adicionado: ${produto.nome}`);
-        
-        // Restaurar botão após 2 segundos
+        botao.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        botao.disabled = true;
+
         setTimeout(() => {
+            mostrarMensagemTemporaria(`✅ Obrigado, ${nome}! Responderemos em breve.`, 'sucesso');
+            form.reset();
             botao.innerHTML = textoOriginal;
-            botao.style.background = '';
-            botao.style.borderColor = '';
-            botao.style.color = '';
-        }, 2000);
-        
-    } catch (erro) {
-        console.log('❌ Erro ao adicionar ao carrinho:', erro.message);
-        alert('⚠️ Não foi possível adicionar o produto. Tente novamente.');
+            botao.disabled = false;
+        }, 1800);
+    });
+}
+
+// Função auxiliar para mensagens temporárias (substitui alert)
+function mostrarMensagemTemporaria(texto, tipo = 'info') {
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.top = '20px';
+    div.style.right = '20px';
+    div.style.padding = '16px 24px';
+    div.style.borderRadius = '12px';
+    div.style.color = '#fff';
+    div.style.background = tipo === 'sucesso' ? '#1dd1a1' : tipo === 'erro' ? '#ff4757' : '#d4af37';
+    div.style.zIndex = '3000';
+    div.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
+    div.textContent = texto;
+    document.body.appendChild(div);
+
+    setTimeout(() => {
+        div.style.opacity = '0';
+        setTimeout(() => div.remove(), 500);
+    }, 4000);
+}
+
+// 4. CARRINHO DE COMPRAS (modal + remoção + localStorage)
+function inicializarCarrinho() {
+    // Carregar do localStorage
+    const salvo = localStorage.getItem('rodmokCarrinho');
+    if (salvo) {
+        carrinho = JSON.parse(salvo);
+        totalCarrinho = carrinho.reduce((sum, item) => sum + item.preco, 0);
+    }
+
+    atualizarContadorCarrinho();
+
+    // Ícone do carrinho abre modal
+    const icone = document.querySelector('.carrinho');
+    if (icone) {
+        icone.addEventListener('click', abrirModalCarrinho);
+    }
+
+    // Vincular botões de adicionar (use class="btn-adicionar" e data-id no HTML)
+    document.querySelectorAll('.btn-adicionar').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const id = this.getAttribute('data-id');
+            if (id) adicionarAoCarrinho(id);
+        });
+    });
+}
+
+function adicionarAoCarrinho(id) {
+    const produtos = {
+        '1': { nome: 'Camiseta "Urban Legends"', preco: 89.90 },
+        '2': { nome: 'Jaqueta "Night Rider"', preco: 159.90 },
+        '3': { nome: 'Calça "Street Comfort"', preco: 129.90 }
+        // adicione mais produtos aqui conforme necessário
+    };
+
+    const produto = produtos[id];
+    if (!produto) return;
+
+    carrinho.push(produto);
+    totalCarrinho += produto.preco;
+
+    localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
+    atualizarContadorCarrinho();
+
+    // Feedback no botão
+    const textoOriginal = event.target.innerHTML;
+    event.target.innerHTML = 'Adicionado ✓';
+    event.target.style.background = '#ffd700';
+    event.target.style.color = '#0a0a0a';
+
+    setTimeout(() => {
+        event.target.innerHTML = textoOriginal;
+        event.target.style.background = '';
+        event.target.style.color = '';
+    }, 1800);
+}
+
+function removerDoCarrinho(index) {
+    if (index >= 0 && index < carrinho.length) {
+        totalCarrinho -= carrinho[index].preco;
+        carrinho.splice(index, 1);
+        localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
+        atualizarContadorCarrinho();
+        renderizarModalCarrinho(); // atualiza o modal aberto
     }
 }
 
 function atualizarContadorCarrinho() {
-    try {
-        const contador = document.querySelector('.contador');
-        if (contador) {
-            contador.textContent = carrinho.length;
-            contador.style.display = carrinho.length > 0 ? 'flex' : 'none';
-        }
-    } catch (erro) {
-        console.log('⚠️ Contador não atualizado:', erro.message);
+    const contador = document.querySelector('.contador');
+    if (contador) {
+        contador.textContent = carrinho.length;
+        contador.style.display = carrinho.length > 0 ? 'flex' : 'none';
     }
 }
 
-// 5. ANIMAÇÕES
-function animarEntrada() {
-    try {
-        // Animação no título principal
-        const titulo = document.querySelector('.logo h1');
-        if (titulo) {
-            titulo.style.opacity = '0';
-            titulo.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                titulo.style.transition = 'all 0.8s ease';
-                titulo.style.opacity = '1';
-                titulo.style.transform = 'translateY(0)';
-            }, 300);
-        }
-        
-        // Animação nos produtos
-        const produtos = document.querySelectorAll('.produto');
-        produtos.forEach((prod, index) => {
-            prod.style.opacity = '0';
-            prod.style.transform = 'translateY(30px)';
-            
-            setTimeout(() => {
-                prod.style.transition = 'all 0.6s ease';
-                prod.style.opacity = '1';
-                prod.style.transform = 'translateY(0)';
-            }, 500 + (index * 200));
+function abrirModalCarrinho() {
+    const modal = document.getElementById('modal-carrinho');
+    if (!modal) return;
+
+    renderizarModalCarrinho();
+    modal.style.display = 'flex';
+}
+
+function renderizarModalCarrinho() {
+    const container = document.getElementById('itens-carrinho');
+    const totalEl = document.getElementById('total-carrinho');
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (carrinho.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#aaa; padding:30px 0;">Seu carrinho está vazio.</p>';
+    } else {
+        carrinho.forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = 'item-carrinho';
+            div.innerHTML = `
+                <div>
+                    <strong>${item.nome}</strong><br>
+                    <span style="color:#ffd700;">R$ ${item.preco.toFixed(2)}</span>
+                </div>
+                <button class="btn-remover" onclick="removerDoCarrinho(${i})">Remover</button>
+            `;
+            container.appendChild(div);
         });
-        
-        console.log('✅ Animações configuradas');
-    } catch (erro) {
-        console.log('⚠️ Animações não funcionaram:', erro.message);
+    }
+
+    if (totalEl) {
+        totalEl.textContent = `Total: R$ ${totalCarrinho.toFixed(2)}`;
     }
 }
 
-// 6. TESTES
-function testarFuncionalidades() {
-    console.log('🧪 Testando funcionalidades...');
-    
-    // Teste básico
-    const testes = {
-        'JavaScript': typeof window !== 'undefined',
-        'LocalStorage': typeof localStorage !== 'undefined',
-        'Console': typeof console !== 'undefined',
-        'DOM': typeof document !== 'undefined'
-    };
-    
-    console.table(testes);
-    
-    // Mensagem de boas-vindas
-    const hora = new Date().getHours();
-    let saudacao;
-    if (hora < 12) saudacao = 'Bom dia';
-    else if (hora < 18) saudacao = 'Boa tarde';
-    else saudacao = 'Boa noite';
-    
-    console.log(`👋 ${saudacao}! Bem-vindo(a) à RodMok Store!`);
+// 5. ANIMAÇÕES DE ENTRADA
+function animarEntrada() {
+    const titulo = document.querySelector('.logo h1');
+    if (titulo) {
+        titulo.style.opacity = 0;
+        titulo.style.transform = 'translateY(-30px)';
+        setTimeout(() => {
+            titulo.style.transition = 'all 0.8s ease-out';
+            titulo.style.opacity = 1;
+            titulo.style.transform = 'translateY(0)';
+        }, 200);
+    }
+
+    document.querySelectorAll('.produto').forEach((el, i) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(40px)';
+        setTimeout(() => {
+            el.style.transition = 'all 0.7s ease-out';
+            el.style.opacity = 1;
+            el.style.transform = 'translateY(0)';
+        }, 400 + i * 150);
+    });
 }
 
-// ========== FUNÇÕES ADICIONAIS ==========
+// 6. NEWSLETTER
+function configurarNewsletter() {
+    const btn = document.querySelector('.newsletter button');
+    const input = document.querySelector('.newsletter input');
 
-// Newsletter
+    if (btn && input) {
+        btn.addEventListener('click', inscreverNewsletter);
+        input.addEventListener('keypress', e => {
+            if (e.key === 'Enter') inscreverNewsletter();
+        });
+    }
+}
+
 function inscreverNewsletter() {
     const input = document.querySelector('.newsletter input');
-    if (input && input.value.includes('@')) {
-        alert(`✅ Obrigado por se inscrever! Em breve você receberá nossas novidades no e-mail: ${input.value}`);
+    if (!input) return;
+
+    const email = input.value.trim();
+    if (email && email.includes('@')) {
+        mostrarMensagemTemporaria(`✅ Inscrito com sucesso! ${email}`, 'sucesso');
         input.value = '';
     } else {
-        alert('❌ Por favor, insira um e-mail válido!');
-        input.focus();
+        mostrarMensagemTemporaria('❌ Digite um e-mail válido!', 'erro');
     }
 }
 
-// Configurar botão da newsletter
-document.addEventListener('DOMContentLoaded', function() {
-    const btnNewsletter = document.querySelector('.newsletter button');
-    if (btnNewsletter) {
-        btnNewsletter.addEventListener('click', inscreverNewsletter);
-        
-        const inputNewsletter = document.querySelector('.newsletter input');
-        if (inputNewsletter) {
-            inputNewsletter.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    inscreverNewsletter();
-                }
-            });
-        }
+// 7. TESTES E BOAS-VINDAS
+function testarFuncionalidades() {
+    console.log('🧪 Testes básicos:');
+    console.table({
+        JS: typeof window !== 'undefined',
+        localStorage: !!localStorage,
+        DOM: !!document
+    });
+
+    const hora = new Date().getHours();
+    const saudacao = hora < 12 ? 'Bom dia' : hora < 18 ? 'Boa tarde' : 'Boa noite';
+    console.log(`👋 ${saudacao}! Bem-vindo à RodMok Store!`);
+}
+
+// ========== FECHAR MODAL ==========
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'modal-carrinho') {
+        document.getElementById('modal-carrinho').style.display = 'none';
     }
 });
 
-// ========== EXPORTAÇÃO PARA USO EXTERNO ==========
-window.rodmokCarregado = true;
+// ========== EXPORTAÇÕES ==========
 window.RodMokStore = {
-    adicionarCarrinho,
-    atualizarContadorCarrinho,
-    testarFuncionalidades
+    adicionarAoCarrinho,
+    atualizarContadorCarrinho
 };
 
-console.log('🚀 RodMok Store JavaScript inicializado com sucesso!');
+console.log('🚀 RodMok Store inicializado com sucesso!');
