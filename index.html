@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
     <!-- Cabeçalho -->
     <header>
         <div class="container">
@@ -42,8 +43,8 @@
             <div class="hero-imagem"></div>
         </section>
 
-        <!-- Seção Destaques -->
-        <section class="destaques">
+        <!-- Seção Coleções / Destaques -->
+        <section id="colecoes" class="destaques">
             <div class="container">
                 <h2><i class="fas fa-star"></i> DESTAQUES DA TEMPORADA</h2>
                 <div class="grade-produtos">
@@ -75,8 +76,7 @@
                     
                     <!-- Produto 3 -->
                     <div class="produto">
-                        <div class="produto-img" style="background: linear-gradient(45deg, #54a0ff, #2e86de);">
-                        </div>
+                        <div class="produto-img" style="background: linear-gradient(45deg, #54a0ff, #2e86de);"></div>
                         <h3>Calça "Street Comfort"</h3>
                         <p>Tecido tecnológico com flexibilidade total</p>
                         <div class="preco">R$ 129,90</div>
@@ -191,7 +191,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="ano-atual">2024</span> RodMok Store. Todos os direitos reservados.</p>
+                <p>&copy; <span id="ano-atual">2025</span> RodMok Store. Todos os direitos reservados.</p>
                 <p class="credito">
                     Desenvolvido com <i class="fas fa-heart" style="color:#ff4757;"></i> para você
                     | <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> Ver no GitHub</a>
@@ -213,10 +213,9 @@
     <!-- JavaScript -->
     <script src="./rodmok.js"></script>
 
-    <!-- Backup caso o JS externo não carregue -->
+    <!-- Backup -->
     <script>
         if (typeof rodmokCarregado === 'undefined') {
-            console.log('Carregando backup JS...');
             document.getElementById('ano-atual').textContent = new Date().getFullYear();
         }
     </script>
