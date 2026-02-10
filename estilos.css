@@ -1,0 +1,579 @@
+/* RESET E CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* CABEÇALHO */
+header {
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    padding: 15px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff9ff3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 i {
+    color: #ff9ff3;
+}
+
+.slogan {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu a:hover, .menu a.ativo {
+    color: #ff6b6b;
+}
+
+.carrinho {
+    position: relative;
+    font-size: 1.5rem;
+    color: #ff9ff3;
+    cursor: pointer;
+}
+
+.contador {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.8rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SEÇÃO HERO */
+.hero {
+    margin-top: 80px;
+    display: flex;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 0 0 30px 30px;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.destaque {
+    color: #ff9ff3;
+    text-shadow: 0 0 10px rgba(255, 159, 243, 0.5);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.btn-grande {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.btn-grande:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.hero-imagem {
+    flex: 1;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff9ff3);
+    opacity: 0.8;
+    border-radius: 20px;
+    margin: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-imagem::after {
+    content: "MODA";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: bold;
+    color: white;
+    opacity: 0.2;
+}
+
+/* SEÇÃO DESTAQUES */
+.destaques {
+    padding: 80px 0;
+    background: #0a0a0a;
+}
+
+.destaques h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.grade-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.produto {
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    border: 1px solid #333;
+}
+
+.produto:hover {
+    transform: translateY(-10px);
+    border-color: #ff6b6b;
+}
+
+.produto-img {
+    height: 250px;
+    position: relative;
+}
+
+.novo, .promocao {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.novo {
+    background: #ff9ff3;
+    color: #000;
+}
+
+.promocao {
+    background: #1dd1a1;
+    color: #000;
+}
+
+.produto h3 {
+    padding: 20px 20px 10px;
+    font-size: 1.4rem;
+}
+
+.produto p {
+    padding: 0 20px;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.preco {
+    padding: 15px 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff9ff3;
+}
+
+.preco s {
+    color: #777;
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+.btn-comprar {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid #ff6b6b;
+    color: #ff6b6b;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-comprar:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* SEÇÃO SOBRE */
+.sobre {
+    padding: 80px 0;
+    background: #111;
+}
+
+.sobre h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.sobre-content {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.sobre-texto {
+    flex: 1;
+}
+
+.sobre-texto p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+.sobre-texto strong {
+    color: #ff9ff3;
+}
+
+.estatisticas {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.estatistica {
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.estatistica h3 {
+    font-size: 2.5rem;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+.estatistica p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.sobre-imagem {
+    flex: 1;
+    height: 400px;
+    background: linear-gradient(45deg, #1dd1a1, #10ac84);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sobre-imagem::after {
+    content: "EXCLUSIVIDADE";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    opacity: 0.2;
+    white-space: nowrap;
+}
+
+/* SEÇÃO CONTATO */
+.contato {
+    padding: 80px 0;
+    background: #0a0a0a;
+}
+
+.contato h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.contato-content {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.form-contato {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-contato input,
+.form-contato textarea {
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+.form-contato input:focus,
+.form-contato textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+.info-contato {
+    flex: 1;
+    min-width: 300px;
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.info-contato h3 {
+    color: #ff9ff3;
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-contato h3:first-child {
+    margin-top: 0;
+}
+
+.info-contato p {
+    color: #ddd;
+    margin-bottom: 15px;
+    padding-left: 30px;
+}
+
+/* RODAPÉ */
+footer {
+    background: #111;
+    padding: 60px 0 20px;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    color: #ff9ff3;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.footer-col p {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.redes-sociais {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.redes-sociais a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.redes-sociais a:hover {
+    background: #ff6b6b;
+}
+
+.footer-col a {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #ff6b6b;
+}
+
+.newsletter {
+    display: flex;
+    margin-top: 15px;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 12px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px 0 0 8px;
+    color: white;
+}
+
+.newsletter button {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    color: #777;
+}
+
+.credito {
+    margin-top: 15px;
+}
+
+.credito a {
+    color: #ff9ff3;
+    text-decoration: none;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content {
+        padding: 40px 20px;
+    }
+    
+    .hero-imagem {
+        height: 200px;
+        margin: 0 20px 40px;
+    }
+    
+    .sobre-content {
+        flex-direction: column;
+    }
+    
+    .sobre-imagem {
+        height: 300px;
+        width: 100%;
+    }
+    
+    .menu {
+        display: none; /* Em mobile, normalmente fica hamburguer */
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+}
