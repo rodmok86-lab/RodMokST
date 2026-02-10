@@ -6,8 +6,79 @@
     <title>RodMok Store — Roupas Únicas para Quem é Único</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS do Modal Carrinho - mova para estilos.css depois */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(6px);
+        }
+        .modal-content {
+            background: #111111;
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid #d4af37;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: #e0d4b3;
+        }
+        .modal-content h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #3a2f1e;
+        }
+        .item-carrinho div {
+            flex: 1;
+        }
+        .btn-remover {
+            background: #8b0000;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-remover:hover {
+            background: #b22222;
+        }
+        .total-carrinho {
+            text-align: right;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            color: #ffd700;
+        }
+        .btn-fechar {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #d4af37, #ffd700);
+            color: #0a0a0a;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-fechar:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
+
     <!-- Cabeçalho -->
     <header>
         <div class="container">
@@ -55,7 +126,7 @@
                         <h3>Camiseta "Urban Legends"</h3>
                         <p>Estampa exclusiva em algodão premium</p>
                         <div class="preco">R$ 89,90</div>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(1)"><i class="fas fa-cart-plus"></i> Adicionar</button>
+                        <button class="btn-comprar btn-adicionar" data-id="1"><i class="fas fa-cart-plus"></i> Adicionar</button>
                     </div>
                     
                     <!-- Produto 2 -->
@@ -66,7 +137,7 @@
                         <h3>Jaqueta "Night Rider"</h3>
                         <p>Couro sintético com capuz destacável</p>
                         <div class="preco"><s>R$ 199,90</s> R$ 159,90</div>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(2)"><i class="fas fa-cart-plus"></i> Adicionar</button>
+                        <button class="btn-comprar btn-adicionar" data-id="2"><i class="fas fa-cart-plus"></i> Adicionar</button>
                     </div>
                     
                     <!-- Produto 3 -->
@@ -76,7 +147,7 @@
                         <h3>Calça "Street Comfort"</h3>
                         <p>Tecido tecnológico com flexibilidade total</p>
                         <div class="preco">R$ 129,90</div>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(3)"><i class="fas fa-cart-plus"></i> Adicionar</button>
+                        <button class="btn-comprar btn-adicionar" data-id="3"><i class="fas fa-cart-plus"></i> Adicionar</button>
                     </div>
                 </div>
             </div>
@@ -194,18 +265,5 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="./rodmok.js"></script>
-    
-    <!-- Script direto no HTML (backup) -->
-    <script>
-        // Backup: se o arquivo externo não carregar
-        if (typeof rodmokCarregado === 'undefined') {
-            console.log('Carregando backup JS...');
-            document.getElementById('ano-atual').textContent = new Date().getFullYear();
-        }
-    </script>
-</body>
-
-</html>
-
+    <!-- MODAL DO CARRINHO -->
+    <div id="modal-carr
