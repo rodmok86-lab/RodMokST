@@ -276,3 +276,72 @@ header .container {
     .menu { gap: 15px; justify-content: center; }
     .grade-produtos { grid-template-columns: 1fr; }
 }
+
+/* === CORREÇÕES PARA MELHORAR VISIBILIDADE E ÍCONES === */
+
+/* Header mais legível - fundo um pouco mais transparente */
+header {
+    background-color: rgba(10, 10, 10, 0.85) !important; /* menos opaco */
+}
+
+/* Texto do hero mais visível */
+.hero h2 {
+    color: #ffd700 !important;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* sombra dourada para destacar */
+    font-weight: bold;
+}
+
+.hero p {
+    color: #d4af37 !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* Botão VER COLEÇÃO destacado */
+.btn-grande {
+    background: linear-gradient(45deg, #d4af37, #ffd700) !important;
+    color: #0a0a0a !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5) !important;
+    border: 1px solid #ffd700 !important;
+}
+
+/* Ícones do menu e contato visíveis */
+.menu a i,
+.info-contato h3 i,
+.footer-col h3 i,
+.redes-sociais a i,
+.credito i {
+    color: #ffd700 !important; /* dourado forte */
+}
+
+/* Ícones do rodapé e redes sociais */
+.redes-sociais a {
+    background: #3a2f1e !important; /* fundo escuro com borda dourada */
+    color: #ffd700 !important;
+    border: 1px solid #d4af37;
+}
+
+.redes-sociais a:hover {
+    background: #d4af37 !important;
+    color: #0a0a0a !important;
+}
+
+/* Garantir que Font Awesome carregue corretamente */
+.fas, .fab {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}
+
+/* Modal carrinho mais legível */
+.modal-content {
+    background: #1a1a1a !important;
+    border-color: #ffd700 !important;
+}
+
+.modal-content h2 {
+    color: #ffd700 !important;
+}
+
+.btn-fechar {
+    background: linear-gradient(45deg, #d4af37, #ffd700) !important;
+    color: #0a0a0a !important;
+}
