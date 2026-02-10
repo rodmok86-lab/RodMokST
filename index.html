@@ -6,94 +6,6 @@
     <title>RodMok Store — Roupas Únicas para Quem é Único</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos adicionais para o carrinho – pode mover para estilos.css depois */
-        .botoes-carrinho {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-fechar {
-            background: #3a2f1e;
-            color: #e0d4b3;
-            padding: 14px 32px;
-            border: 2px solid #d4af37;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-fechar:hover {
-            background: #d4af37;
-            color: #0a0a0a;
-        }
-        .btn-comprar-agora {
-            background: linear-gradient(45deg, #d4af37, #ffd700);
-            color: #0a0a0a;
-            padding: 14px 32px;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-comprar-agora:hover {
-            opacity: 0.92;
-            transform: translateY(-2px);
-        }
-        .item-carrinho {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid #3a2f1e;
-        }
-        .item-info {
-            flex: 1;
-        }
-        .item-nome {
-            font-weight: 600;
-            color: #ffd700;
-            margin-bottom: 4px;
-        }
-        .item-preco {
-            color: #e0d4b3;
-            font-size: 1.05rem;
-        }
-        .btn-remover {
-            background: #8b0000;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-        .btn-remover:hover {
-            background: #b22222;
-        }
-        .vazio {
-            text-align: center;
-            padding: 50px 0;
-            color: #b8975e;
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 36px;
-            color: #d4af37;
-            cursor: pointer;
-        }
-        .close:hover {
-            color: #ffd700;
-        }
-    </style>
 </head>
 <body>
 
@@ -112,16 +24,16 @@
                 <a href="#contato"><i class="fas fa-phone"></i> Contato</a>
             </nav>
             
-            <div class="carrinho" id="abrir-carrinho">
+            <div class="carrinho">
                 <i class="fas fa-shopping-bag"></i>
-                <span class="contador" id="contador-carrinho">0</span>
+                <span class="contador">0</span>
             </div>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
     <main>
-        <!-- Hero -->
+        <!-- Seção Hero -->
         <section id="inicio" class="hero">
             <div class="hero-content">
                 <h2>MODA COM <span class="destaque">IDENTIDADE</span></h2>
@@ -131,7 +43,7 @@
             <div class="hero-imagem"></div>
         </section>
 
-        <!-- Destaques / Produtos -->
+        <!-- Seção Coleções / Destaques -->
         <section id="colecoes" class="destaques">
             <div class="container">
                 <h2><i class="fas fa-star"></i> DESTAQUES DA TEMPORADA</h2>
@@ -144,10 +56,7 @@
                         <h3>Camiseta "Urban Legends"</h3>
                         <p>Estampa exclusiva em algodão premium</p>
                         <div class="preco">R$ 89,90</div>
-                        <button class="btn-comprar btn-adicionar" 
-                                data-id="1" 
-                                data-nome="Camiseta Urban Legends" 
-                                data-preco="89.90">
+                        <button class="btn-comprar btn-adicionar" data-id="1">
                             <i class="fas fa-cart-plus"></i> Adicionar
                         </button>
                     </div>
@@ -160,10 +69,7 @@
                         <h3>Jaqueta "Night Rider"</h3>
                         <p>Couro sintético com capuz destacável</p>
                         <div class="preco"><s>R$ 199,90</s> R$ 159,90</div>
-                        <button class="btn-comprar btn-adicionar" 
-                                data-id="2" 
-                                data-nome="Jaqueta Night Rider" 
-                                data-preco="159.90">
+                        <button class="btn-comprar btn-adicionar" data-id="2">
                             <i class="fas fa-cart-plus"></i> Adicionar
                         </button>
                     </div>
@@ -174,10 +80,7 @@
                         <h3>Calça "Street Comfort"</h3>
                         <p>Tecido tecnológico com flexibilidade total</p>
                         <div class="preco">R$ 129,90</div>
-                        <button class="btn-comprar btn-adicionar" 
-                                data-id="3" 
-                                data-nome="Calça Street Comfort" 
-                                data-preco="129.90">
+                        <button class="btn-comprar btn-adicionar" data-id="3">
                             <i class="fas fa-cart-plus"></i> Adicionar
                         </button>
                     </div>
@@ -185,143 +88,136 @@
             </div>
         </section>
 
-        <!-- Sobre e Contato – adicione aqui as seções que estavam no seu código original -->
+        <!-- Seção Sobre -->
+        <section id="sobre" class="sobre">
+            <div class="container">
+                <h2><i class="fas fa-heart"></i> NOSSA HISTÓRIA</h2>
+                <div class="sobre-content">
+                    <div class="sobre-texto">
+                        <p>A <strong>RodMok Store</strong> nasceu da paixão por moda autêntica e da crença de que cada pessoa é única.</p>
+                        <p>Nossas peças são cuidadosamente selecionadas e muitas delas são <strong>edições limitadas</strong>, garantindo que você tenha um estilo exclusivo.</p>
+                        <p>Trabalhamos apenas com materiais de alta qualidade e fornecedores comprometidos com a sustentabilidade.</p>
+                        
+                        <div class="estatisticas">
+                            <div class="estatistica">
+                                <h3>+500</h3>
+                                <p>Clientes Satisfeitos</p>
+                            </div>
+                            <div class="estatistica">
+                                <h3>+150</h3>
+                                <p>Peças Exclusivas</p>
+                            </div>
+                            <div class="estatistica">
+                                <h3>100%</h3>
+                                <p>Qualidade Garantida</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sobre-imagem"></div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Seção Contato -->
+        <section id="contato" class="contato">
+            <div class="container">
+                <h2><i class="fas fa-comments"></i> FALE CONOSCO</h2>
+                <div class="contato-content">
+                    <form class="form-contato">
+                        <input type="text" placeholder="Seu nome" required>
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <textarea placeholder="Sua mensagem..." rows="5" required></textarea>
+                        <button type="submit" class="btn-grande">ENVIAR MENSAGEM <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    
+                    <div class="info-contato">
+                        <h3><i class="fas fa-map-marker-alt"></i> Onde Estamos</h3>
+                        <p>Av. Paulista, 1000 - São Paulo, SP</p>
+                        
+                        <h3><i class="fas fa-phone"></i> Telefone</h3>
+                        <p>(11) 99999-9999</p>
+                        
+                        <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                        <p>contato@rodmokstore.com</p>
+                        
+                        <h3><i class="fas fa-clock"></i> Horário</h3>
+                        <p>Segunda a Sexta: 9h às 18h</p>
+                        <p>Sábado: 10h às 16h</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Rodapé – adicione aqui o rodapé original -->
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>RODMOK STORE</h3>
+                    <p>Moda exclusiva para pessoas extraordinárias.</p>
+                    <div class="redes-sociais">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <a href="#inicio">Início</a>
+                    <a href="#colecoes">Coleções</a>
+                    <a href="#sobre">Sobre Nós</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Suporte</h3>
+                    <a href="#">Trocas e Devoluções</a>
+                    <a href="#">Entregas</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Tamanhos</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Receba nossas novidades e promoções:</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Seu e-mail">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="ano-atual">2025</span> RodMok Store. Todos os direitos reservados.</p>
+                <p class="credito">
+                    Desenvolvido com <i class="fas fa-heart" style="color:#ff4757;"></i> para você
+                    | <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> Ver no GitHub</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <!-- MODAL DO CARRINHO -->
     <div id="modal-carrinho" class="modal" style="display:none;">
         <div class="modal-content">
-            <span class="close" id="fechar-carrinho-modal">×</span>
             <h2>Seu Carrinho</h2>
             <div id="itens-carrinho"></div>
             <div class="total-carrinho" id="total-carrinho">Total: R$ 0,00</div>
-            
-            <div class="botoes-carrinho">
-                <button id="fechar-carrinho" class="btn-fechar">Fechar</button>
-                <button id="comprar-agora" class="btn-comprar-agora">Comprar Agora</button>
-            </div>
+            <button id="fechar-carrinho" class="btn-fechar">Fechar</button>
         </div>
     </div>
 
     <!-- JavaScript -->
+    <script src="./rodmok.js"></script>
+
+    <!-- Backup -->
     <script>
-        let carrinho = JSON.parse(localStorage.getItem('rodmokCarrinho')) || [];
-
-        function atualizarCarrinho() {
-            const container = document.getElementById('itens-carrinho');
-            const totalEl = document.getElementById('total-carrinho');
-            const contadorEl = document.getElementById('contador-carrinho');
-
-            if (!container) return;
-
-            container.innerHTML = '';
-
-            if (carrinho.length === 0) {
-                container.innerHTML = '<p class="vazio">Seu carrinho está vazio no momento...</p>';
-                totalEl.textContent = 'Total: R$ 0,00';
-                contadorEl.textContent = '0';
-                localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
-                return;
-            }
-
-            let total = 0;
-
-            carrinho.forEach((item, index) => {
-                const subtotal = item.preco * item.quantidade;
-                total += subtotal;
-
-                container.innerHTML += `
-                    <div class="item-carrinho">
-                        <div class="item-info">
-                            <div class="item-nome">${item.nome}</div>
-                            <div class="item-preco">R$ \( {subtotal.toFixed(2)} ( \){item.quantidade}x R$ ${item.preco.toFixed(2)})</div>
-                        </div>
-                        <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
-                    </div>
-                `;
-            });
-
-            totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
-            contadorEl.textContent = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-            localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
+        if (typeof rodmokCarregado === 'undefined') {
+            document.getElementById('ano-atual').textContent = new Date().getFullYear();
         }
-
-        function adicionarItem(id, nome, preco) {
-            const existe = carrinho.find(item => item.id === id);
-            if (existe) {
-                existe.quantidade++;
-            } else {
-                carrinho.push({ id, nome, preco: parseFloat(preco), quantidade: 1 });
-            }
-            atualizarCarrinho();
-        }
-
-        function removerItem(index) {
-            carrinho.splice(index, 1);
-            atualizarCarrinho();
-        }
-
-        function finalizarCompra() {
-            if (carrinho.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-
-            let mensagem = "Olá RodMok Store! Quero finalizar este pedido:\n\n";
-            carrinho.forEach(item => {
-                mensagem += `• ${item.nome} × \( {item.quantidade} un. = R \) ${(item.preco * item.quantidade).toFixed(2)}\n`;
-            });
-            mensagem += `\nTotal: ${document.getElementById('total-carrinho').textContent}\n\n`;
-            mensagem += "Dados para entrega:\n[Seu nome completo]\n[Endereço completo com CEP]\n[Telefone para contato]\nForma de pagamento: [Pix / Cartão / Boleto]";
-
-            const numeroWhats = "5511940015555";
-            const url = `https://wa.me/\( {numeroWhats}?text= \){encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank');
-        }
-
-        // Eventos
-        document.querySelectorAll('.btn-adicionar').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
-                const nome = btn.dataset.nome;
-                const preco = btn.dataset.preco;
-                adicionarItem(id, nome, preco);
-                // Feedback visual
-                btn.innerHTML = '<i class="fas fa-check"></i> Adicionado!';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-cart-plus"></i> Adicionar';
-                }, 1500);
-            });
-        });
-
-        document.getElementById('abrir-carrinho').addEventListener('click', () => {
-            atualizarCarrinho();
-            document.getElementById('modal-carrinho').style.display = 'flex';
-        });
-
-        document.getElementById('fechar-carrinho').addEventListener('click', () => {
-            document.getElementById('modal-carrinho').style.display = 'none';
-        });
-
-        document.getElementById('fechar-carrinho-modal').addEventListener('click', () => {
-            document.getElementById('modal-carrinho').style.display = 'none';
-        });
-
-        document.getElementById('comprar-agora').addEventListener('click', finalizarCompra);
-
-        // Fecha ao clicar fora
-        document.getElementById('modal-carrinho').addEventListener('click', e => {
-            if (e.target === document.getElementById('modal-carrinho')) {
-                document.getElementById('modal-carrinho').style.display = 'none';
-            }
-        });
-
-        // Inicializa
-        atualizarCarrinho();
-        document.getElementById('ano-atual') && (document.getElementById('ano-atual').textContent = new Date().getFullYear());
     </script>
 </body>
 </html>
