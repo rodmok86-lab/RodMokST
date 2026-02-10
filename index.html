@@ -6,6 +6,135 @@
     <title>RodMok Store — Roupas Únicas para Quem é Único</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos responsivos e melhorados apenas para Sobre e Contato */
+        .sobre, .contato {
+            padding: 80px 0;
+        }
+
+        .sobre-content, .contato-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .sobre-texto, .info-contato {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .sobre-imagem, .contato .sobre-imagem {  /* caso tenha imagem no contato também */
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #1a140a, #111);
+            border-radius: 16px;
+            border: 1px solid #3a2f1e;
+        }
+
+        .estatisticas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .estatistica {
+            text-align: center;
+            background: rgba(212,175,55,0.08);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid #d4af37;
+            min-width: 140px;
+        }
+
+        .estatistica h3 {
+            color: #ffd700;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .form-contato {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-contato input,
+        .form-contato textarea {
+            padding: 14px 16px;
+            border: 1px solid #3a2f1e;
+            border-radius: 8px;
+            background: #111;
+            color: #e0d4b3;
+            font-size: 1rem;
+        }
+
+        .form-contato input:focus,
+        .form-contato textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+        }
+
+        .info-contato {
+            background: rgba(10,10,10,0.6);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #3a2f1e;
+        }
+
+        .info-contato h3 {
+            color: #ffd700;
+            margin: 20px 0 8px;
+            font-size: 1.3rem;
+        }
+
+        .info-contato p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsividade específica para Sobre e Contato */
+        @media (max-width: 768px) {
+            .sobre-content, .contato-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .sobre-imagem {
+                height: 300px;
+                width: 100%;
+            }
+
+            .estatisticas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form-contato, .info-contato {
+                width: 100%;
+            }
+
+            .contato h2, .sobre h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sobre, .contato {
+                padding: 50px 0;
+            }
+
+            .estatistica {
+                width: 100%;
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -88,7 +217,7 @@
             </div>
         </section>
 
-        <!-- Seção Sobre -->
+        <!-- Seção Sobre (agora responsiva e mais bonita) -->
         <section id="sobre" class="sobre">
             <div class="container">
                 <h2><i class="fas fa-heart"></i> NOSSA HISTÓRIA</h2>
@@ -118,7 +247,7 @@
             </div>
         </section>
 
-        <!-- Seção Contato -->
+        <!-- Seção Contato (agora responsiva e mais bonita) -->
         <section id="contato" class="contato">
             <div class="container">
                 <h2><i class="fas fa-comments"></i> FALE CONOSCO</h2>
