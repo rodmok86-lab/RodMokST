@@ -1,227 +1,327 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RodMok Store - Carrinho</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f8f8f8;
-    }
-
-    /* Estilo do modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      overflow: auto;
-    }
-
-    .modal-content {
-      background-color: white;
-      margin: 10% auto;
-      padding: 24px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 480px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 32px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-    }
-
-    h2 {
-      text-align: center;
-      margin: 0 0 20px;
-      color: #333;
-    }
-
-    .item-carrinho {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .item-carrinho span {
-      flex: 1;
-    }
-
-    .remover {
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9em;
-    }
-
-    .remover:hover {
-      background: #e63939;
-    }
-
-    .total {
-      font-size: 1.2em;
-      font-weight: bold;
-      text-align: right;
-      margin: 20px 0 16px;
-      color: #222;
-    }
-
-    .botoes {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    button {
-      padding: 12px 28px;
-      font-size: 1.05em;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .btn-fechar {
-      background: #6c757d;
-      color: white;
-    }
-
-    .btn-fechar:hover {
-      background: #5a6268;
-    }
-
-    .btn-comprar {
-      background: #28a745;
-      color: white;
-      font-weight: bold;
-    }
-
-    .btn-comprar:hover {
-      background: #218838;
-    }
-
-    .vazio {
-      text-align: center;
-      color: #777;
-      padding: 40px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RodMok Store — Roupas Únicas para Quem é Único</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos adicionais para o carrinho – pode mover para estilos.css depois */
+        .botoes-carrinho {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-fechar {
+            background: #3a2f1e;
+            color: #e0d4b3;
+            padding: 14px 32px;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-fechar:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+        .btn-comprar-agora {
+            background: linear-gradient(45deg, #d4af37, #ffd700);
+            color: #0a0a0a;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-comprar-agora:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+        .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #3a2f1e;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-nome {
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 4px;
+        }
+        .item-preco {
+            color: #e0d4b3;
+            font-size: 1.05rem;
+        }
+        .btn-remover {
+            background: #8b0000;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .btn-remover:hover {
+            background: #b22222;
+        }
+        .vazio {
+            text-align: center;
+            padding: 50px 0;
+            color: #b8975e;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 36px;
+            color: #d4af37;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #ffd700;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Botão para abrir o carrinho (exemplo) -->
-  <button onclick="abrirCarrinho()">Ver Carrinho</button>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-crown"></i> RODMOK STORE</h1>
+                <p class="slogan">Roupas Únicas para Quem é Único</p>
+            </div>
+            
+            <nav class="menu">
+                <a href="#inicio" class="ativo"><i class="fas fa-home"></i> Início</a>
+                <a href="#colecoes"><i class="fas fa-tshirt"></i> Coleções</a>
+                <a href="#sobre"><i class="fas fa-store"></i> Sobre</a>
+                <a href="#contato"><i class="fas fa-phone"></i> Contato</a>
+            </nav>
+            
+            <div class="carrinho" id="abrir-carrinho">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="contador" id="contador-carrinho">0</span>
+            </div>
+        </div>
+    </header>
 
-  <!-- MODAL DO CARRINHO -->
-  <div id="modalCarrinho" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="fecharCarrinho()">&times;</span>
-      <h2>Seu Carrinho</h2>
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Hero -->
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h2>MODA COM <span class="destaque">IDENTIDADE</span></h2>
+                <p>Peças exclusivas que contam a sua história</p>
+                <a href="#colecoes" class="btn-grande">VER COLEÇÃO <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-imagem"></div>
+        </section>
 
-      <div id="itensCarrinho"></div>
+        <!-- Destaques / Produtos -->
+        <section id="colecoes" class="destaques">
+            <div class="container">
+                <h2><i class="fas fa-star"></i> DESTAQUES DA TEMPORADA</h2>
+                <div class="grade-produtos">
+                    <!-- Produto 1 -->
+                    <div class="produto">
+                        <div class="produto-img" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24);">
+                            <span class="novo">NOVO</span>
+                        </div>
+                        <h3>Camiseta "Urban Legends"</h3>
+                        <p>Estampa exclusiva em algodão premium</p>
+                        <div class="preco">R$ 89,90</div>
+                        <button class="btn-comprar btn-adicionar" 
+                                data-id="1" 
+                                data-nome="Camiseta Urban Legends" 
+                                data-preco="89.90">
+                            <i class="fas fa-cart-plus"></i> Adicionar
+                        </button>
+                    </div>
+                    
+                    <!-- Produto 2 -->
+                    <div class="produto">
+                        <div class="produto-img" style="background: linear-gradient(45deg, #1dd1a1, #10ac84);">
+                            <span class="promocao">-20%</span>
+                        </div>
+                        <h3>Jaqueta "Night Rider"</h3>
+                        <p>Couro sintético com capuz destacável</p>
+                        <div class="preco"><s>R$ 199,90</s> R$ 159,90</div>
+                        <button class="btn-comprar btn-adicionar" 
+                                data-id="2" 
+                                data-nome="Jaqueta Night Rider" 
+                                data-preco="159.90">
+                            <i class="fas fa-cart-plus"></i> Adicionar
+                        </button>
+                    </div>
+                    
+                    <!-- Produto 3 -->
+                    <div class="produto">
+                        <div class="produto-img" style="background: linear-gradient(45deg, #54a0ff, #2e86de);"></div>
+                        <h3>Calça "Street Comfort"</h3>
+                        <p>Tecido tecnológico com flexibilidade total</p>
+                        <div class="preco">R$ 129,90</div>
+                        <button class="btn-comprar btn-adicionar" 
+                                data-id="3" 
+                                data-nome="Calça Street Comfort" 
+                                data-preco="129.90">
+                            <i class="fas fa-cart-plus"></i> Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="total" id="totalCarrinho">Total: R$ 0,00</div>
+        <!-- Sobre e Contato – adicione aqui as seções que estavam no seu código original -->
 
-      <div class="botoes">
-        <button class="btn-fechar" onclick="fecharCarrinho()">Fechar</button>
-        <button class="btn-comprar" onclick="finalizarCompra()">Comprar Agora</button>
-      </div>
+    </main>
+
+    <!-- Rodapé – adicione aqui o rodapé original -->
+
+    <!-- MODAL DO CARRINHO -->
+    <div id="modal-carrinho" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="fechar-carrinho-modal">×</span>
+            <h2>Seu Carrinho</h2>
+            <div id="itens-carrinho"></div>
+            <div class="total-carrinho" id="total-carrinho">Total: R$ 0,00</div>
+            
+            <div class="botoes-carrinho">
+                <button id="fechar-carrinho" class="btn-fechar">Fechar</button>
+                <button id="comprar-agora" class="btn-comprar-agora">Comprar Agora</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Exemplo de produtos no carrinho (você pode puxar do localStorage ou do seu sistema)
-    let carrinho = [
-      { nome: "Camiseta Básica Preta", preco: 79.90, quantidade: 1 },
-      { nome: "Calça Jeans Slim", preco: 159.90, quantidade: 1 }
-    ];
+    <!-- JavaScript -->
+    <script>
+        let carrinho = JSON.parse(localStorage.getItem('rodmokCarrinho')) || [];
 
-    function atualizarCarrinho() {
-      const container = document.getElementById("itensCarrinho");
-      const totalEl = document.getElementById("totalCarrinho");
-      container.innerHTML = "";
+        function atualizarCarrinho() {
+            const container = document.getElementById('itens-carrinho');
+            const totalEl = document.getElementById('total-carrinho');
+            const contadorEl = document.getElementById('contador-carrinho');
 
-      if (carrinho.length === 0) {
-        container.innerHTML = '<div class="vazio">Seu carrinho está vazio.</div>';
-        totalEl.textContent = "Total: R$ 0,00";
-        return;
-      }
+            if (!container) return;
 
-      let total = 0;
+            container.innerHTML = '';
 
-      carrinho.forEach((item, index) => {
-        const subtotal = item.preco * item.quantidade;
-        total += subtotal;
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p class="vazio">Seu carrinho está vazio no momento...</p>';
+                totalEl.textContent = 'Total: R$ 0,00';
+                contadorEl.textContent = '0';
+                localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
+                return;
+            }
 
-        const div = document.createElement("div");
-        div.className = "item-carrinho";
-        div.innerHTML = `
-          <span>\( {item.nome} — R \) ${subtotal.toFixed(2)}</span>
-          <button class="remover" onclick="removerItem(${index})">Remover</button>
-        `;
-        container.appendChild(div);
-      });
+            let total = 0;
 
-      totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
-    }
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.quantidade;
+                total += subtotal;
 
-    function abrirCarrinho() {
-      atualizarCarrinho();
-      document.getElementById("modalCarrinho").style.display = "block";
-    }
+                container.innerHTML += `
+                    <div class="item-carrinho">
+                        <div class="item-info">
+                            <div class="item-nome">${item.nome}</div>
+                            <div class="item-preco">R$ \( {subtotal.toFixed(2)} ( \){item.quantidade}x R$ ${item.preco.toFixed(2)})</div>
+                        </div>
+                        <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
+                    </div>
+                `;
+            });
 
-    function fecharCarrinho() {
-      document.getElementById("modalCarrinho").style.display = "none";
-    }
+            totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
+            contadorEl.textContent = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            localStorage.setItem('rodmokCarrinho', JSON.stringify(carrinho));
+        }
 
-    function removerItem(index) {
-      carrinho.splice(index, 1);
-      atualizarCarrinho();
-    }
+        function adicionarItem(id, nome, preco) {
+            const existe = carrinho.find(item => item.id === id);
+            if (existe) {
+                existe.quantidade++;
+            } else {
+                carrinho.push({ id, nome, preco: parseFloat(preco), quantidade: 1 });
+            }
+            atualizarCarrinho();
+        }
 
-    function finalizarCompra() {
-      if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-        return;
-      }
-      // Aqui você coloca a ação real: redirecionar, WhatsApp, checkout, etc.
-      alert("Indo para o checkout!\n\nTotal: " + document.getElementById("totalCarrinho").textContent);
-      // Exemplo WhatsApp:
-      // window.open("https://wa.me/556999999999?text=Quero%20comprar%20os%20itens%20do%20carrinho!", "_blank");
-      // fecharCarrinho();
-    }
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        }
 
-    // Fecha modal clicando fora
-    window.onclick = function(event) {
-      const modal = document.getElementById("modalCarrinho");
-      if (event.target === modal) {
-        fecharCarrinho();
-      }
-    };
-  </script>
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
 
+            let mensagem = "Olá RodMok Store! Quero finalizar este pedido:\n\n";
+            carrinho.forEach(item => {
+                mensagem += `• ${item.nome} × \( {item.quantidade} un. = R \) ${(item.preco * item.quantidade).toFixed(2)}\n`;
+            });
+            mensagem += `\nTotal: ${document.getElementById('total-carrinho').textContent}\n\n`;
+            mensagem += "Dados para entrega:\n[Seu nome completo]\n[Endereço completo com CEP]\n[Telefone para contato]\nForma de pagamento: [Pix / Cartão / Boleto]";
+
+            const numeroWhats = "5511940015555";
+            const url = `https://wa.me/\( {numeroWhats}?text= \){encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+
+        // Eventos
+        document.querySelectorAll('.btn-adicionar').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                const nome = btn.dataset.nome;
+                const preco = btn.dataset.preco;
+                adicionarItem(id, nome, preco);
+                // Feedback visual
+                btn.innerHTML = '<i class="fas fa-check"></i> Adicionado!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-cart-plus"></i> Adicionar';
+                }, 1500);
+            });
+        });
+
+        document.getElementById('abrir-carrinho').addEventListener('click', () => {
+            atualizarCarrinho();
+            document.getElementById('modal-carrinho').style.display = 'flex';
+        });
+
+        document.getElementById('fechar-carrinho').addEventListener('click', () => {
+            document.getElementById('modal-carrinho').style.display = 'none';
+        });
+
+        document.getElementById('fechar-carrinho-modal').addEventListener('click', () => {
+            document.getElementById('modal-carrinho').style.display = 'none';
+        });
+
+        document.getElementById('comprar-agora').addEventListener('click', finalizarCompra);
+
+        // Fecha ao clicar fora
+        document.getElementById('modal-carrinho').addEventListener('click', e => {
+            if (e.target === document.getElementById('modal-carrinho')) {
+                document.getElementById('modal-carrinho').style.display = 'none';
+            }
+        });
+
+        // Inicializa
+        atualizarCarrinho();
+        document.getElementById('ano-atual') && (document.getElementById('ano-atual').textContent = new Date().getFullYear());
+    </script>
 </body>
 </html>
