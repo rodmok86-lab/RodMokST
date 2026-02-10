@@ -1,5 +1,15 @@
-/* RESET */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ================================================ */
+/*          RODMOK STORE - CSS COMPLETO             */
+/* Tema preto + dourado + correções de visibilidade */
+/* Modal carrinho + ícones visíveis                 */
+/* ================================================ */
+
+/* RESET E BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,18 +17,19 @@ body {
     color: #e0d4b3;
     line-height: 1.6;
     overflow-x: hidden;
-    padding-top: 80px;
+    padding-top: 80px; /* espaço para header fixo */
 }
 
+/* CONTAINER GERAL */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header */
+/* CABEÇALHO FIXO */
 header {
-    background: rgba(10,10,10,0.95);
+    background-color: rgba(10, 10, 10, 0.85); /* menos opaco para legibilidade */
     backdrop-filter: blur(10px);
     position: fixed;
     width: 100%;
@@ -33,11 +44,12 @@ header .container {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 15px;
 }
 
 .logo h1 {
     font-size: 1.8rem;
-    background: linear-gradient(45deg, #d4af37, #ffd700);
+    background: linear-gradient(45deg, #d4af37, #ffd700, #ffdd57);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -46,15 +58,21 @@ header .container {
     gap: 10px;
 }
 
+.logo h1 i {
+    color: #ffd700;
+}
+
 .slogan {
     font-size: 0.9rem;
     color: #b8975e;
+    margin-top: 5px;
 }
 
 .menu {
     display: flex;
     gap: 25px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .menu a {
@@ -67,22 +85,27 @@ header .container {
     gap: 8px;
 }
 
-.menu a:hover, .menu a.ativo {
+.menu a:hover,
+.menu a.ativo {
     color: #ffd700;
 }
 
+.menu a i {
+    color: #ffd700 !important;
+}
+
 .carrinho {
+    position: relative;
     font-size: 1.5rem;
     color: #ffd700;
     cursor: pointer;
-    position: relative;
 }
 
 .contador {
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #ffd700;
+    background: #ffdd57;
     color: #0a0a0a;
     font-size: 0.8rem;
     width: 20px;
@@ -94,12 +117,14 @@ header .container {
     font-weight: bold;
 }
 
-/* Hero */
+/* HERO */
 .hero {
+    margin-top: 20px;
     display: flex;
     min-height: 70vh;
-    background: linear-gradient(135deg, #111, #1a140a);
+    background: linear-gradient(135deg, #111111 0%, #1a140a 100%);
     border-radius: 0 0 30px 30px;
+    overflow: hidden;
     align-items: center;
 }
 
@@ -111,38 +136,48 @@ header .container {
 
 .hero h2 {
     font-size: 3.5rem;
-    color: #ffd700;
+    color: #ffdd57;
+    text-shadow: 0 0 15px rgba(255, 221, 87, 0.6);
+    margin-bottom: 20px;
 }
 
 .destaque {
     color: #d4af37;
 }
 
+.hero p {
+    font-size: 1.3rem;
+    color: #f0e68c;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
 .btn-grande {
+    display: inline-block;
     background: linear-gradient(45deg, #d4af37, #ffd700);
     color: #0a0a0a;
     padding: 15px 30px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    transition: transform 0.3s;
 }
 
-.hero-imagem {
-    flex: 1;
-    min-height: 300px;
-    background: linear-gradient(45deg, #d4af37, #ffd700);
-    opacity: 0.15;
+.btn-grande:hover {
+    transform: translateY(-3px);
 }
 
-/* Produtos */
+/* DESTAQUES / PRODUTOS */
 .destaques {
     padding: 80px 0;
 }
 
 .destaques h2 {
     text-align: center;
-    color: #ffd700;
     font-size: 2.5rem;
+    color: #ffd700;
     margin-bottom: 50px;
 }
 
@@ -153,11 +188,11 @@ header .container {
 }
 
 .produto {
-    background: #111;
+    background: #111111;
     border-radius: 15px;
     overflow: hidden;
     border: 1px solid #3a2f1e;
-    transition: all 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
 .produto:hover {
@@ -177,13 +212,35 @@ header .container {
     padding: 5px 15px;
     border-radius: 20px;
     font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.novo { background: #ffd700; color: #0a0a0a; }
+.promocao { background: #d4af37; color: #0a0a0a; }
+
+.produto h3 {
+    padding: 20px 20px 5px;
+    font-size: 1.4rem;
+    color: #e0d4b3;
+}
+
+.produto p {
+    padding: 0 20px 15px;
+    color: #b8975e;
+    font-size: 0.95rem;
 }
 
 .preco {
     padding: 0 20px 15px;
     font-size: 1.6rem;
-    color: #ffd700;
     font-weight: bold;
+    color: #ffd700;
+}
+
+.preco s {
+    color: #777;
+    font-size: 1.3rem;
+    margin-right: 10px;
 }
 
 .btn-comprar {
@@ -202,7 +259,58 @@ header .container {
     color: #0a0a0a;
 }
 
-/* Modal Carrinho */
+/* SOBRE */
+.sobre {
+    padding: 80px 0;
+    background: #111;
+}
+
+.sobre h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffd700;
+    margin-bottom: 50px;
+}
+
+/* CONTATO */
+.contato {
+    padding: 80px 0;
+}
+
+.contato h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffd700;
+    margin-bottom: 50px;
+}
+
+.info-contato h3 i {
+    color: #ffd700;
+}
+
+/* RODAPÉ */
+footer {
+    background: #111;
+    padding: 60px 0 20px;
+    border-top: 1px solid #3a2f1e;
+}
+
+.footer-col h3 {
+    color: #ffd700;
+}
+
+.redes-sociais a {
+    background: #3a2f1e;
+    color: #ffd700;
+    border: 1px solid #d4af37;
+}
+
+.redes-sociais a:hover {
+    background: #d4af37;
+    color: #0a0a0a;
+}
+
+/* MODAL CARRINHO */
 .modal {
     position: fixed;
     inset: 0;
@@ -215,10 +323,10 @@ header .container {
 }
 
 .modal-content {
-    background: #111111;
+    background: #1c1c1c;
     padding: 30px;
     border-radius: 16px;
-    border: 2px solid #d4af37;
+    border: 2px solid #ffd700;
     max-width: 500px;
     width: 90%;
     max-height: 85vh;
@@ -227,7 +335,7 @@ header .container {
 }
 
 .modal-content h2 {
-    color: #ffd700;
+    color: #ffdd57;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -235,6 +343,7 @@ header .container {
 .item-carrinho {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid #3a2f1e;
 }
@@ -270,78 +379,21 @@ header .container {
     cursor: pointer;
 }
 
-/* Responsividade */
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .hero { flex-direction: column; text-align: center; }
-    .menu { gap: 15px; justify-content: center; }
-    .grade-produtos { grid-template-columns: 1fr; }
-}
-
-/* === CORREÇÕES PARA MELHORAR VISIBILIDADE E ÍCONES === */
-
-/* Header mais legível - fundo um pouco mais transparente */
-header {
-    background-color: rgba(10, 10, 10, 0.85) !important; /* menos opaco */
-}
-
-/* Texto do hero mais visível */
-.hero h2 {
-    color: #ffd700 !important;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* sombra dourada para destacar */
-    font-weight: bold;
-}
-
-.hero p {
-    color: #d4af37 !important;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-}
-
-/* Botão VER COLEÇÃO destacado */
-.btn-grande {
-    background: linear-gradient(45deg, #d4af37, #ffd700) !important;
-    color: #0a0a0a !important;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5) !important;
-    border: 1px solid #ffd700 !important;
-}
-
-/* Ícones do menu e contato visíveis */
-.menu a i,
-.info-contato h3 i,
-.footer-col h3 i,
-.redes-sociais a i,
-.credito i {
-    color: #ffd700 !important; /* dourado forte */
-}
-
-/* Ícones do rodapé e redes sociais */
-.redes-sociais a {
-    background: #3a2f1e !important; /* fundo escuro com borda dourada */
-    color: #ffd700 !important;
-    border: 1px solid #d4af37;
-}
-
-.redes-sociais a:hover {
-    background: #d4af37 !important;
-    color: #0a0a0a !important;
-}
-
-/* Garantir que Font Awesome carregue corretamente */
-.fas, .fab {
-    font-family: "Font Awesome 6 Free" !important;
-    font-weight: 900 !important;
-}
-
-/* Modal carrinho mais legível */
-.modal-content {
-    background: #1a1a1a !important;
-    border-color: #ffd700 !important;
-}
-
-.modal-content h2 {
-    color: #ffd700 !important;
-}
-
-.btn-fechar {
-    background: linear-gradient(45deg, #d4af37, #ffd700) !important;
-    color: #0a0a0a !important;
+    header .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .menu {
+        gap: 15px;
+        justify-content: center;
+    }
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .grade-produtos {
+        grid-template-columns: 1fr;
+    }
 }
