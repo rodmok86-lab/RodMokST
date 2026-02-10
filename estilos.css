@@ -8,18 +8,20 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #0a0a0a;
-    color: #e0d4b3;          /* bege-dourado claro para texto principal */
+    color: #e0d4b3; /* bege-dourado claro para textos */
     line-height: 1.6;
     overflow-x: hidden;
+    padding-top: 80px; /* espaço para header fixo */
 }
 
+/* CONTAINER GERAL */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* CABEÇALHO */
+/* CABEÇALHO FIXO */
 header {
     background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
@@ -27,7 +29,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #3a2f1e;   /* borda dourada escura */
+    border-bottom: 1px solid #3a2f1e;
     padding: 15px 0;
 }
 
@@ -35,6 +37,8 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .logo h1 {
@@ -61,6 +65,8 @@ header .container {
 .menu {
     display: flex;
     gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .menu a {
@@ -73,7 +79,8 @@ header .container {
     gap: 8px;
 }
 
-.menu a:hover, .menu a.ativo {
+.menu a:hover,
+.menu a.ativo {
     color: #ffd700;
 }
 
@@ -88,7 +95,7 @@ header .container {
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #d4af37;
+    background: #ffd700;
     color: #0a0a0a;
     font-size: 0.8rem;
     width: 20px;
@@ -97,31 +104,30 @@ header .container {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
 }
 
-/* SEÇÃO HERO */
+/* HERO */
 .hero {
-    margin-top: 80px;
+    margin-top: 20px;
     display: flex;
-    min-height: 80vh;
+    min-height: 70vh;
     background: linear-gradient(135deg, #111111 0%, #1a140a 100%);
     border-radius: 0 0 30px 30px;
     overflow: hidden;
+    align-items: center;
 }
 
 .hero-content {
     flex: 1;
     padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
 }
 
 .hero h2 {
     font-size: 3.5rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
     color: #ffd700;
+    margin-bottom: 20px;
 }
 
 .destaque {
@@ -144,13 +150,7 @@ header .container {
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
-    border: none;
-    cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: fit-content;
 }
 
 .btn-grande:hover {
@@ -162,44 +162,24 @@ header .container {
     flex: 1;
     background: linear-gradient(45deg, #d4af37, #ffd700, #b8975e);
     opacity: 0.15;
-    border-radius: 20px;
-    margin: 30px;
-    position: relative;
-    overflow: hidden;
+    min-height: 300px;
 }
 
-.hero-imagem::after {
-    content: "EXCLUSIVO";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 5rem;
-    font-weight: bold;
-    color: #ffd700;
-    opacity: 0.08;
-}
-
-/* SEÇÃO DESTAQUES */
+/* DESTAQUES / PRODUTOS */
 .destaques {
     padding: 80px 0;
-    background: #0a0a0a;
 }
 
 .destaques h2 {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 50px;
     color: #ffd700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+    margin-bottom: 50px;
 }
 
 .grade-produtos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -207,8 +187,8 @@ header .container {
     background: #111111;
     border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.3s;
     border: 1px solid #3a2f1e;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
 .produto:hover {
@@ -242,38 +222,36 @@ header .container {
 }
 
 .produto h3 {
-    padding: 20px 20px 10px;
+    padding: 20px 20px 5px;
     font-size: 1.4rem;
     color: #e0d4b3;
 }
 
 .produto p {
-    padding: 0 20px;
+    padding: 0 20px 15px;
     color: #b8975e;
     font-size: 0.95rem;
 }
 
 .preco {
-    padding: 15px 20px;
-    font-size: 1.8rem;
+    padding: 0 20px 15px;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #ffd700;
 }
 
 .preco s {
     color: #777;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-right: 10px;
 }
 
 .btn-comprar {
-    width: calc(100% - 40px);
-    margin: 0 20px 20px;
-    padding: 12px;
+    width: 100%;
+    padding: 14px;
     background: transparent;
     border: 2px solid #d4af37;
     color: #d4af37;
-    border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
@@ -288,7 +266,7 @@ header .container {
     color: #0a0a0a;
 }
 
-/* SEÇÃO SOBRE */
+/* SOBRE */
 .sobre {
     padding: 80px 0;
     background: #111;
@@ -297,39 +275,313 @@ header .container {
 .sobre h2 {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 50px;
     color: #ffd700;
+    margin-bottom: 50px;
+}
+
+.sobre-content {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sobre-texto {
+    flex: 1;
+}
+
+.sobre-texto p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+.sobre-texto strong {
+    color: #ffd700;
+}
+
+.estatisticas {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.estatistica {
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+}
+
+.estatistica h3 {
+    font-size: 2.5rem;
+    color: #ffd700;
+}
+
+.estatistica p {
+    color: #aaa;
+}
+
+.sobre-imagem {
+    flex: 1;
+    min-height: 400px;
+    background: linear-gradient(45deg, #d4af37, #ffd700);
+    border-radius: 20px;
+    opacity: 0.2;
+}
+
+/* CONTATO */
+.contato {
+    padding: 80px 0;
+}
+
+.contato h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffd700;
+    margin-bottom: 50px;
+}
+
+.contato-content {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.form-contato {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-contato input,
+.form-contato textarea {
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #3a2f1e;
+    border-radius: 8px;
+    color: #e0d4b3;
+    font-size: 1rem;
+}
+
+.form-contato input:focus,
+.form-contato textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.info-contato {
+    flex: 1;
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #3a2f1e;
+}
+
+.info-contato h3 {
+    color: #ffd700;
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* RODAPÉ */
+footer {
+    background: #111;
+    padding: 60px 0 20px;
+    border-top: 1px solid #3a2f1e;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+.footer-col p, .footer-col a {
+    color: #b8975e;
+}
+
+.footer-col a:hover {
+    color: #ffd700;
+}
+
+.redes-sociais {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.redes-sociais a {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    transition: background 0.3s;
 }
 
-/* (o resto das seções sobre, contato e rodapé seguem o mesmo padrão: trocar #ff6b6b → #d4af37 / #ffd700, #ff9ff3 → #ffd700, etc.) */
+.redes-sociais a:hover {
+    background: #d4af37;
+}
 
-/* Exemplo rápido para o resto (substitua cores equivalentes): */
+.newsletter {
+    display: flex;
+    margin-top: 15px;
+}
 
-/* Contato */
-.contato h2 { color: #ffd700; }
-.form-contato input, .form-contato textarea { border-color: #3a2f1e; }
-.form-contato input:focus, .form-contato textarea:focus { border-color: #d4af37; }
-.info-contato h3 { color: #ffd700; }
+.newsletter input {
+    flex: 1;
+    padding: 12px;
+    background: #1a1a1a;
+    border: 1px solid #3a2f1e;
+    border-radius: 8px 0 0 8px;
+    color: #e0d4b3;
+}
 
-/* Rodapé */
-footer { border-top: 1px solid #3a2f1e; }
-.footer-col h3 { color: #ffd700; }
-.redes-sociais a:hover { background: #d4af37; }
-.newsletter button { background: #d4af37; color: #0a0a0a; }
-.credito a { color: #ffd700; }
+.newsletter button {
+    background: #d4af37;
+    color: #0a0a0a;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
 
-/* RESPONSIVIDADE (mantida igual) */
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #3a2f1e;
+    color: #777;
+}
+
+.credito a {
+    color: #ffd700;
+}
+
+/* MODAL CARRINHO */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(6px);
+}
+
+.modal-content {
+    background: #111111;
+    padding: 30px;
+    border-radius: 16px;
+    border: 2px solid #d4af37;
+    max-width: 500px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    color: #e0d4b3;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.modal-content h2 {
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #3a2f1e;
+}
+
+.item-carrinho div {
+    flex: 1;
+}
+
+.btn-remover {
+    background: #8b0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-remover:hover {
+    background: #b22222;
+}
+
+.total-carrinho {
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #ffd700;
+}
+
+.btn-fechar {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, #d4af37, #ffd700);
+    color: #0a0a0a;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-fechar:hover {
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .hero { flex-direction: column; min-height: auto; }
-    .hero h2 { font-size: 2.5rem; }
-    .hero-content { padding: 40px 20px; }
-    .hero-imagem { height: 200px; margin: 0 20px 40px; }
-    .sobre-content { flex-direction: column; }
-    .sobre-imagem { height: 300px; width: 100%; }
-    .menu { display: none; }
-    .logo h1 { font-size: 1.5rem; }
+    header .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .menu {
+        gap: 15px;
+        font-size: 0.95rem;
+    }
+    
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-content {
+        padding: 40px 20px;
+    }
+    
+    .sobre-content {
+        flex-direction: column;
+    }
+    
+    .grade-produtos {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
 }
